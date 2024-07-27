@@ -1,8 +1,13 @@
-import { Sequelize } from "sequelize";
-const db = new Sequelize('u652011097_tracer_study','u652011097_root','L9i1d0@m0',{
-    host: '153.92.15.21',
-    dialect:'mysql',
-    dialectModule: require('mysql2'),
-  });
+const { Sequelize } = require('sequelize');
+const config = require('./config');
 
-export default db;
+const env = process.env.NODE_ENV || 'development';
+const dbConfig = config[env];
+
+const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
+  host: dbConfig.host,
+  dialect: dbConfig.dialect,
+  dialectModule: dbConfig.dialectModule,
+});
+
+module.exports = sequelize;
