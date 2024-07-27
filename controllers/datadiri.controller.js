@@ -188,7 +188,7 @@ module.exports = {
     try {
       //mendapatkan data semua item
       let itemGets = await db.sequelize.query(
-        "SELECT Users.id, Users.id as users_id, Users.name, Users.email, Users.password, Users.role, Datadiris.id as datadiri_id, Datadiris.nim as nim, Datadiris.no_alumni, Datadiris.no_hp as no_hp, Datadiris.is_kuisioner as kuis, Datadiris.is_verified as is_verified, Akademiks.angkatan, Akademiks.tahun_lulus, Akademiks.tanggal_yudisium as tanggal_lulus, Akademiks.program_studi as prodi FROM `Users` LEFT JOIN Datadiris ON Users.id = Datadiris.users_id INNER JOIN akademiks ON Users.id = Akademiks.users_id ORDER BY Users.id ASC",
+        "SELECT Users.id, Users.id as users_id, Users.name, Users.email, Users.password, Users.role, Datadiris.id as datadiri_id, Datadiris.nim as nim, Datadiris.no_alumni, Datadiris.no_hp as no_hp, Datadiris.is_kuisioner as kuis, Datadiris.is_verified as is_verified, Akademiks.angkatan, Akademiks.tahun_lulus, Akademiks.tanggal_yudisium as tanggal_lulus, Akademiks.program_studi as prodi FROM `Users` LEFT JOIN Datadiris ON Users.id = Datadiris.users_id INNER JOIN Akademiks ON Users.id = Akademiks.users_id ORDER BY Users.id ASC",
         { type: Sequelize.QueryTypes.SELECT }
       );
       //menampilkan admin yang membuat item, karena kita sudah membuat relasi
@@ -253,7 +253,7 @@ module.exports = {
     try {
       //mendapatkan data item berdasarkan id
       let itemGet = await db.sequelize.query(
-        "SELECT  Users.id, Users.id as users_id, Users.name, Users.email, Users.password, Users.role, Datadiris.id as datadiri_id, Datadiris.nim as nim, Datadiris.no_alumni, Datadiris.no_hp as no_hp, Datadiris.is_kuisioner as kuis, Datadiris.is_verified as is_verified, Datadiris.foto, Datadiris.tempat_lahir, Datadiris.tanggal_lahir, Datadiris.alamat, Akademiks.angkatan, Akademiks.tahun_lulus, Akademiks.tanggal_yudisium as tanggal_lulus, Akademiks.program_studi as prodi, pekerjaans.instansi FROM `Users` LEFT JOIN Datadiris ON Users.id = Datadiris.users_id INNER JOIN akademiks ON Users.id = Akademiks.users_id INNER JOIN pekerjaans ON Users.id = pekerjaans.users_id WHERE Users.id = " +
+        "SELECT  Users.id, Users.id as users_id, Users.name, Users.email, Users.password, Users.role, Datadiris.id as datadiri_id, Datadiris.nim as nim, Datadiris.no_alumni, Datadiris.no_hp as no_hp, Datadiris.is_kuisioner as kuis, Datadiris.is_verified as is_verified, Datadiris.foto, Datadiris.tempat_lahir, Datadiris.tanggal_lahir, Datadiris.alamat, Akademiks.angkatan, Akademiks.tahun_lulus, Akademiks.tanggal_yudisium as tanggal_lulus, Akademiks.program_studi as prodi, pekerjaans.instansi FROM `Users` LEFT JOIN Datadiris ON Users.id = Datadiris.users_id INNER JOIN Akademiks ON Users.id = Akademiks.users_id INNER JOIN pekerjaans ON Users.id = pekerjaans.users_id WHERE Users.id = " +
           id +
           " ORDER BY Users.id ASC",
         { type: Sequelize.QueryTypes.SELECT }
@@ -338,7 +338,7 @@ module.exports = {
       const nama = req.params.nama;
       //mendapatkan data item berdasarkan id
       let itemGet = await db.sequelize.query(
-        "SELECT Users.id, Users.id as users_id, Users.name, Datadiris.nama as nama, Users.email, Users.password, Users.role, Datadiris.nim as nim, Datadiris.no_alumni, Datadiris.no_hp as no_hp, Datadiris.is_kuisioner as kuis, Datadiris.alamat, Datadiris.is_verified as is_verified, Akademiks.angkatan, Akademiks.tahun_lulus, Akademiks.tanggal_yudisium as tanggal_lulus, Akademiks.program_studi as prodi, Akademiks.fakultas as fakultas FROM `Users` LEFT JOIN Datadiris ON Users.id = Datadiris.users_id INNER JOIN akademiks ON Users.id = Akademiks.users_id WHERE Datadiris.nim LIKE '%" +
+        "SELECT Users.id, Users.id as users_id, Users.name, Datadiris.nama as nama, Users.email, Users.password, Users.role, Datadiris.nim as nim, Datadiris.no_alumni, Datadiris.no_hp as no_hp, Datadiris.is_kuisioner as kuis, Datadiris.alamat, Datadiris.is_verified as is_verified, Akademiks.angkatan, Akademiks.tahun_lulus, Akademiks.tanggal_yudisium as tanggal_lulus, Akademiks.program_studi as prodi, Akademiks.fakultas as fakultas FROM `Users` LEFT JOIN Datadiris ON Users.id = Datadiris.users_id INNER JOIN Akademiks ON Users.id = Akademiks.users_id WHERE Datadiris.nim LIKE '%" +
           nim +
           "%' AND Datadiris.nama LIKE '%" +
           nama +
