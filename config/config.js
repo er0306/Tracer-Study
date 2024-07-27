@@ -10,7 +10,7 @@ module.exports = {
     dialect: 'mysql',
     dialectModule: require('mysql2'),
     pool: {
-      max: 5000,
+      max: 25,
       min: 0,
       acquire: 30000,
       idle: 10000
@@ -24,7 +24,7 @@ module.exports = {
     dialect: 'mysql',
     dialectModule: require('mysql2'),
     pool: {
-      max: 5000,
+      max: 25,
       min: 0,
       acquire: 30000,
       idle: 10000
@@ -38,7 +38,7 @@ module.exports = {
     dialect: 'mysql',
     dialectModule: require('mysql2'),
     pool: {
-      max: 5000,
+      max: 25,
       min: 0,
       acquire: 30000,
       idle: 10000
