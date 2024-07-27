@@ -192,7 +192,7 @@ module.exports = {
     try {
       //mendapatkan data item berdasarkan id
       let itemGet = await db.sequelize.query(
-        "SELECT kuisioners.id, kuisioners.kode_pertanyaan, kuisioners.pertanyaan, kuisioners.jenis_pertanyaan FROM `kuisioners` ORDER BY kuisioners.id ASC",
+        "SELECT kuisioners.id, kuisioners.kode_pertanyaan, kuisioners.pertanyaan, kuisioners.jenis_pertanyaan FROM `Kuisioners` ORDER BY kuisioners.id ASC",
         { type: Sequelize.QueryTypes.SELECT }
       );
 
@@ -220,7 +220,7 @@ module.exports = {
     const id = req.params.id;
     try {
       //mendapatkan data item berdasarkan id
-      // let itemGet = await db.sequelize.query("SELECT kuisioners.id, kuisioners.id as kuisioners_id, kuisioners.pertanyaan, kuisionerdetails.opsi_jawaban, kuisionerdetails.jenis_soal FROM `kuisioners` JOIN kuisionerdetails ON kuisioners.id = kuisionerdetails.kuisioners_id WHERE kuisioners.id = "+id+" ORDER BY kuisioners.id ASC", { type: Sequelize.QueryTypes.SELECT });
+      // let itemGet = await db.sequelize.query("SELECT kuisioners.id, kuisioners.id as kuisioners_id, kuisioners.pertanyaan, kuisionerdetails.opsi_jawaban, kuisionerdetails.jenis_soal FROM `Kuisioners` JOIN kuisionerdetails ON kuisioners.id = kuisionerdetails.kuisioners_id WHERE kuisioners.id = "+id+" ORDER BY kuisioners.id ASC", { type: Sequelize.QueryTypes.SELECT });
 
       let itemGet = await Hasilkuisioner.findAll({
         where: {

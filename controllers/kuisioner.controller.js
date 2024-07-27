@@ -80,7 +80,7 @@ module.exports = {
         const id = req.params.id;
         try{
             //mendapatkan data item berdasarkan id
-            let itemGet = await db.sequelize.query("SELECT kuisionersinstansi.id, kuisionersinstansi.pertanyaan FROM `kuisionersinstansi` ORDER BY kuisionersinstansi.id ASC", { type: Sequelize.QueryTypes.SELECT });
+            let itemGet = await db.sequelize.query("SELECT kuisionersinstansi.id, kuisionersinstansi.pertanyaan FROM `Kuisionersinstansi` ORDER BY kuisionersinstansi.id ASC", { type: Sequelize.QueryTypes.SELECT });
 
             //cek jika item tidak ada
             if(!itemGet){
@@ -99,7 +99,7 @@ module.exports = {
         const id = req.params.id;
         try{
             //mendapatkan data item berdasarkan id
-            let itemGet = await db.sequelize.query("SELECT kuisioners.id, kuisioners.pertanyaan, kuisioners.pilihan FROM `kuisioners` ORDER BY kuisioners.id ASC", { type: Sequelize.QueryTypes.SELECT });
+            let itemGet = await db.sequelize.query("SELECT Kuisioners.id, Kuisioners.pertanyaan, Kuisioners.pilihan FROM `Kuisioners` ORDER BY Kuisioners.id ASC", { type: Sequelize.QueryTypes.SELECT });
 
             //cek jika item tidak ada
             if(!itemGet){
@@ -125,7 +125,7 @@ module.exports = {
         const id = req.params.id;
         try{
             //mendapatkan data item berdasarkan id
-            let itemGet = await db.sequelize.query("SELECT kuisioners.id, kuisioners.id as kuisioners_id, kuisioners.pertanyaan, kuisionerdetails.opsi_jawaban, kuisionerdetails.jenis_soal FROM `kuisioners` JOIN kuisionerdetails ON kuisioners.id = kuisionerdetails.kuisioners_id WHERE kuisioners.id = "+id+" ORDER BY kuisioners.id ASC", { type: Sequelize.QueryTypes.SELECT });
+            let itemGet = await db.sequelize.query("SELECT Kuisioners.id, Kuisioners.id as kuisioners_id, Kuisioners.pertanyaan, Kuisionerdetails.opsi_jawaban, Kuisionerdetails.jenis_soal FROM `Kuisioners` JOIN Kuisionerdetails ON Kuisioners.id = Kuisionerdetails.kuisioners_id WHERE Kuisioners.id = "+id+" ORDER BY Kuisioners.id ASC", { type: Sequelize.QueryTypes.SELECT });
 
             //cek jika item tidak ada
             if(!itemGet){

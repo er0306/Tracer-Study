@@ -188,7 +188,7 @@ module.exports = {
     try {
       //mendapatkan data semua item
       let itemGets = await db.sequelize.query(
-        "SELECT users.id, users.id as users_id, users.name, users.email, users.password, users.role, datadiris.id as datadiri_id, datadiris.nim as nim, datadiris.no_alumni, datadiris.no_hp as no_hp, datadiris.is_kuisioner as kuis, datadiris.is_verified as is_verified, akademiks.angkatan, akademiks.tahun_lulus, akademiks.tanggal_yudisium as tanggal_lulus, akademiks.program_studi as prodi FROM `users` LEFT JOIN datadiris ON users.id = datadiris.users_id INNER JOIN akademiks ON users.id = akademiks.users_id ORDER BY users.id ASC",
+        "SELECT Users.id, Users.id as users_id, Users.name, Users.email, Users.password, Users.role, Datadiris.id as datadiri_id, Datadiris.nim as nim, Datadiris.no_alumni, Datadiris.no_hp as no_hp, Datadiris.is_kuisioner as kuis, Datadiris.is_verified as is_verified, Akademiks.angkatan, Akademiks.tahun_lulus, Akademiks.tanggal_yudisium as tanggal_lulus, Akademiks.program_studi as prodi FROM `Users` LEFT JOIN Datadiris ON Users.id = Datadiris.users_id INNER JOIN akademiks ON Users.id = Akademiks.users_id ORDER BY Users.id ASC",
         { type: Sequelize.QueryTypes.SELECT }
       );
       //menampilkan admin yang membuat item, karena kita sudah membuat relasi
@@ -253,9 +253,9 @@ module.exports = {
     try {
       //mendapatkan data item berdasarkan id
       let itemGet = await db.sequelize.query(
-        "SELECT  users.id, users.id as users_id, users.name, users.email, users.password, users.role, datadiris.id as datadiri_id, datadiris.nim as nim, datadiris.no_alumni, datadiris.no_hp as no_hp, datadiris.is_kuisioner as kuis, datadiris.is_verified as is_verified, datadiris.foto, datadiris.tempat_lahir, datadiris.tanggal_lahir, datadiris.alamat, akademiks.angkatan, akademiks.tahun_lulus, akademiks.tanggal_yudisium as tanggal_lulus, akademiks.program_studi as prodi, pekerjaans.instansi FROM `users` LEFT JOIN datadiris ON users.id = datadiris.users_id INNER JOIN akademiks ON users.id = akademiks.users_id INNER JOIN pekerjaans ON users.id = pekerjaans.users_id WHERE users.id = " +
+        "SELECT  Users.id, Users.id as users_id, Users.name, Users.email, Users.password, Users.role, Datadiris.id as datadiri_id, Datadiris.nim as nim, Datadiris.no_alumni, Datadiris.no_hp as no_hp, Datadiris.is_kuisioner as kuis, Datadiris.is_verified as is_verified, Datadiris.foto, Datadiris.tempat_lahir, Datadiris.tanggal_lahir, Datadiris.alamat, Akademiks.angkatan, Akademiks.tahun_lulus, Akademiks.tanggal_yudisium as tanggal_lulus, Akademiks.program_studi as prodi, pekerjaans.instansi FROM `Users` LEFT JOIN Datadiris ON Users.id = Datadiris.users_id INNER JOIN akademiks ON Users.id = Akademiks.users_id INNER JOIN pekerjaans ON Users.id = pekerjaans.users_id WHERE Users.id = " +
           id +
-          " ORDER BY users.id ASC",
+          " ORDER BY Users.id ASC",
         { type: Sequelize.QueryTypes.SELECT }
       );
       // let itemGet = await Datadiri.findAll({
@@ -338,11 +338,11 @@ module.exports = {
       const nama = req.params.nama;
       //mendapatkan data item berdasarkan id
       let itemGet = await db.sequelize.query(
-        "SELECT users.id, users.id as users_id, users.name, datadiris.nama as nama, users.email, users.password, users.role, datadiris.nim as nim, datadiris.no_alumni, datadiris.no_hp as no_hp, datadiris.is_kuisioner as kuis, datadiris.alamat, datadiris.is_verified as is_verified, akademiks.angkatan, akademiks.tahun_lulus, akademiks.tanggal_yudisium as tanggal_lulus, akademiks.program_studi as prodi, akademiks.fakultas as fakultas FROM `users` LEFT JOIN datadiris ON users.id = datadiris.users_id INNER JOIN akademiks ON users.id = akademiks.users_id WHERE datadiris.nim LIKE '%" +
+        "SELECT Users.id, Users.id as users_id, Users.name, Datadiris.nama as nama, Users.email, Users.password, Users.role, Datadiris.nim as nim, Datadiris.no_alumni, Datadiris.no_hp as no_hp, Datadiris.is_kuisioner as kuis, Datadiris.alamat, Datadiris.is_verified as is_verified, Akademiks.angkatan, Akademiks.tahun_lulus, Akademiks.tanggal_yudisium as tanggal_lulus, Akademiks.program_studi as prodi, Akademiks.fakultas as fakultas FROM `Users` LEFT JOIN Datadiris ON Users.id = Datadiris.users_id INNER JOIN akademiks ON Users.id = Akademiks.users_id WHERE Datadiris.nim LIKE '%" +
           nim +
-          "%' AND datadiris.nama LIKE '%" +
+          "%' AND Datadiris.nama LIKE '%" +
           nama +
-          "%' ORDER BY users.id ASC",
+          "%' ORDER BY Users.id ASC",
         { type: Sequelize.QueryTypes.SELECT }
       );
 
@@ -506,7 +506,7 @@ module.exports = {
       const strValue = req.params["string"];
       if (strValue === "alumni") {
         let itemGets = await db.sequelize.query(
-          "SELECT COUNT(no_alumni) AS alumni_total FROM datadiris",
+          "SELECT COUNT(no_alumni) AS alumni_total FROM Datadiris",
           { type: Sequelize.QueryTypes.SELECT }
         );
         return res
@@ -514,7 +514,7 @@ module.exports = {
           .json(response(200, "success get item", itemGets));
       } else if (strValue === "verifikasi") {
         let itemGets = await db.sequelize.query(
-          "SELECT COUNT(no_alumni) AS verifikasi_total FROM datadiris WHERE is_verified = 'no'",
+          "SELECT COUNT(no_alumni) AS verifikasi_total FROM Datadiris WHERE is_verified = 'no'",
           { type: Sequelize.QueryTypes.SELECT }
         );
         return res
@@ -522,7 +522,7 @@ module.exports = {
           .json(response(200, "success get item", itemGets));
       } else if (strValue === "kuisioner") {
         let itemGets = await db.sequelize.query(
-          "SELECT COUNT(no_alumni) AS kuisioner_total FROM datadiris WHERE is_kuisioner = 1",
+          "SELECT COUNT(no_alumni) AS kuisioner_total FROM Datadiris WHERE is_kuisioner = 1",
           { type: Sequelize.QueryTypes.SELECT }
         );
         return res
@@ -530,7 +530,7 @@ module.exports = {
           .json(response(200, "success get item", itemGets));
       } else if (strValue === "flyer") {
         let itemGets = await db.sequelize.query(
-          "SELECT COUNT(id) AS flyer_total FROM lokers",
+          "SELECT COUNT(id) AS flyer_total FROM Lokers",
           { type: Sequelize.QueryTypes.SELECT }
         );
         return res
@@ -538,7 +538,7 @@ module.exports = {
           .json(response(200, "success get item", itemGets));
       } else if (strValue === "publikasi") {
         let itemGets = await db.sequelize.query(
-          "SELECT COUNT(id) AS publikasi_total FROM lokers WHERE isPublish = 'Publish'",
+          "SELECT COUNT(id) AS publikasi_total FROM Lokers WHERE isPublish = 'Publish'",
           { type: Sequelize.QueryTypes.SELECT }
         );
         return res
